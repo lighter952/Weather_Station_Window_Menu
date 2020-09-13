@@ -1,0 +1,23 @@
+{"lat":53.9,
+"lon":27.56,
+"timezone":"Europe/Minsk",
+"timezone_offset":10800,
+"current":
+	{"dt":1598263319,
+	"sunrise":1598238277,
+	"sunset":1598289595,
+	"temp":22,
+	"feels_like":21.12,
+	"pressure":1012,
+	"humidity":60,
+	"dew_point":13.89,
+	"uvi":4.82,
+	"clouds":40,
+	"visibility":10000,
+	"wind_speed":3,
+	"wind_deg":260,
+	"weather":
+		[{"id":802,
+		"main":"Clouds",
+		"description":"scattered clouds",
+		"icon":"03d"}]}
