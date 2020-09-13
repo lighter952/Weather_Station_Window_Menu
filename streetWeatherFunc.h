@@ -31,5 +31,4 @@ void getWeatherFromOWM() {
    lineFromServer = client.readStringUntil('\0'); 
    Serial.println(lineFromServer);
   }
-
 }
