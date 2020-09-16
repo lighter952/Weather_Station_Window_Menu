@@ -470,3 +470,4 @@ void encoderLeftTurn(){
     drawMenuData();
     drawSelectBox(selectedMenuPunct);
 }
+//gow a
