@@ -5,13 +5,14 @@ streetData parseDataFromOWM(){
     Serial.print(F("deserializeJson() failed: "));
     Serial.println(error.c_str());
   }
-  streetData streetData1;
-  streetData1.temp =(doc["current"]["temp"].as<byte>());
+  streetData1.temp =(doc["current"]["temp"].as<int>());
   streetData1.hum =(doc["current"]["humidity"].as<byte>());
   streetData1.pressure =((doc["current"]["pressure"].as<int>())*0.75);
   streetData1.skyIconCode =(doc["current"]["weather"][0]["id"].as<int>());
-  streetData1.windDegree=(doc["current"]["wind_deg"].as<byte>());
+  streetData1.windDegree=(doc["currengitt"]["wind_deg"].as<byte>());
   streetData1.windSpeed=(doc["current"]["wind_speed"].as<byte>());
+  streetData1.timeNow=(doc["current"]["dt"].as<long>());
+  streetData1.timeOffset=(doc["timezone_offset"].as<int>());
   return streetData1;
 }
 
@@ -31,4 +32,6 @@ void getWeatherFromOWM() {
    lineFromServer = client.readStringUntil('\0'); 
    Serial.println(lineFromServer);
   }
+  streetData1 = parseDataFromOWM(); // парсим данные из строки ответа сервера в структуры
+  date.UnixDateUpdate(streetData1.timeNow, 3);
 }

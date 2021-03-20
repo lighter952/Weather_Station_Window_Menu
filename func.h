@@ -1,4 +1,5 @@
 //Файл содержит реализации функций
+
 void startMessage(){
   display.clearDisplay();
   display.setTextSize(2);
@@ -226,9 +227,14 @@ void drawMenuData (){                                  //Отрисовка гл
   // На улице
   display.setCursor(80,15); // ПРАВО-ВЕРХ
   display.print(streetData1.temp);        //Температура улица
-  display.drawBitmap(104,14,CelsiusLargeSimb, 6, 6,1);                            
+  if (streetData1.temp > 9 || streetData1.temp < -9 ) {
+    display.drawBitmap(115,14,CelsiusLargeSimb, 6, 6, 1);
+  }
+  if (streetData1.temp < 9 && streetData1.temp > -9 ) {
+    display.drawBitmap(103,14,CelsiusLargeSimb, 6, 6, 1);                            
+  }
+
   display.setTextSize(1);   // ПРАВО-НИЗ
-  
   display.setCursor(95,38); //Влажность
   display.print(streetData1.hum);
   display.drawChar (108, 38, 37, 1, 0, 1);
@@ -426,10 +432,35 @@ void AboutPunctMenu(){               // Функция с информацией
   }
 }
 void weatherMenuPoint(){             // Меню погоды
-  display.clearDisplay();
-  display.setCursor(0,0);
-  display.print("Weather (in work)");
-  display.display();
+  while(!enc1.isPress()){
+    if(millis()-prTime4>2000){     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      enc1.tick();
+      
+      timeNow1.hours     =  date.hours;
+      timeNow1.mins      =  date.minutes;
+      timeNow1.secs      =  date.seconds;
+      timeNow1.days      =  date.day;
+      timeNow1.mounths   =  date.month;
+      timeNow1.years     =  date.year;
+      timeNow1.dayOfWeek =  date.dayOfWeek;
+
+      display.clearDisplay();
+      //timeConvert();
+      display.setCursor(0,0);
+      display.print(timeNow1.years);
+      display.setCursor(0,10);
+      display.print(timeNow1.mounths);
+      display.setCursor(0,20);
+      display.print(timeNow1.days);
+      display.setCursor(0,30);
+      display.print(timeNow1.hours);
+      display.setCursor(0,40);
+      display.print(timeNow1.mins);
+      display.setCursor(0,50);
+      display.print(timeNow1.dayOfWeek);
+      display.display();
+    }
+  }
 }
 void calendarMenuPoint(){            // Календарь
   display.clearDisplay();
@@ -447,7 +478,7 @@ void selectMenuPunct(byte selectedMenuPunct){ //Выбор пункта меню
     break;
     case 3: SettingsPunctMenu();  //Настройки
     break;
-    case 4: AboutPunctMenu();     // О авторе
+    case 4: AboutPunctMenu();     // О устройстве
     break;
     case 5: calendarMenuPoint();    // Календарь      (НЕРЕАЛИЗОВАННО)
     break;
@@ -470,4 +501,3 @@ void encoderLeftTurn(){
     drawMenuData();
     drawSelectBox(selectedMenuPunct);
 }
-//gow a
