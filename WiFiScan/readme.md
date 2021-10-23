@@ -1,0 +1,1 @@
+Prototype module for finding and saving available WiFi networks.
