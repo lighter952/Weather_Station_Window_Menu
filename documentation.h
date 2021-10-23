@@ -76,4 +76,27 @@ void dayOfWeekConverter(){
   YearCode = (6 + lastYearOfYear + lastYearOfYear / 4) % 7;
   timeNow1.dayOfWeek = (timeNow1.days + MounthCode + YearCode) % 7;
 }
+
+void LightPunctMenu(){               // Меню температуры на улице
+  while(!enc1.isPress()){
+    enc1.tick();
+    if(millis()-prTime2>=UPDATETIME){
+      getLastData();
+      drawKeyValue(light);
+      display.display();
+      prTime2=millis();
+    }
+    if(enc1.isTurn()){
+      while(!enc1.isPress()){
+        enc1.tick();
+        if(millis()-prTime3>=UPDATETIME){
+          getLastData();
+          drawAxes(searchMinValue(light,SIZEARR),light);
+          prTime3=millis();
+        }
+      }
+    }
+  }
+}
+
 */

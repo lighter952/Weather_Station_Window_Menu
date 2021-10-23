@@ -7,6 +7,7 @@
 #include<GyverEncoder.h>
 #include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
+#include "GyverButton.h"
 
 #define XDATA 90          // Размещение данных по Х
 #define XSIMB (XDATA+13)  // Размещение символов по Х
@@ -53,6 +54,8 @@ dht11 DHT11;
 Adafruit_SSD1306 display(128,64,&Wire,5);
 Encoder enc1(D5, D6, D7); // CLK  DT SW
 UnixDate date;
+GButton butt1(D4);
+GButton butt2(D5);
 
 #include "BitMaps.h"
 #include "func.h"
@@ -61,6 +64,7 @@ UnixDate date;
 
 void setup() {
   enc1.setType(TYPE2);
+  butt1.setType(LOW_PULL);
   Wire.begin(D3, D2);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   #if DEBUG

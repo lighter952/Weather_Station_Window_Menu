@@ -355,24 +355,34 @@ void homeHumPunctMenu(){             // Меню влажности дом
     }
   }
 }
-void LightPunctMenu(){               // Меню температуры на улице
+void weatherMenuPoint(){             // Меню погоды
   while(!enc1.isPress()){
-    enc1.tick();
-    if(millis()-prTime2>=UPDATETIME){
-      getLastData();
-      drawKeyValue(light);
+    if(millis()-prTime4>UPDATETIME){     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      enc1.tick();
+      
+      timeNow1.hours     =  date.hours;
+      timeNow1.mins      =  date.minutes;
+      timeNow1.secs      =  date.seconds;
+      timeNow1.days      =  date.day;
+      timeNow1.mounths   =  date.month;
+      timeNow1.years     =  date.year;
+      timeNow1.dayOfWeek =  date.dayOfWeek;
+
+      display.clearDisplay();
+      //timeConvert();
+      display.setCursor(0,0);
+      display.print(timeNow1.years);
+      display.setCursor(0,10);
+      display.print(timeNow1.mounths);
+      display.setCursor(0,20);
+      display.print(timeNow1.days);
+      display.setCursor(0,30);
+      display.print(timeNow1.hours);
+      display.setCursor(0,40);
+      display.print(timeNow1.mins);
+      display.setCursor(0,50);
+      display.print(timeNow1.dayOfWeek);
       display.display();
-      prTime2=millis();
-    }
-    if(enc1.isTurn()){
-      while(!enc1.isPress()){
-        enc1.tick();
-        if(millis()-prTime3>=UPDATETIME){
-          getLastData();
-          drawAxes(searchMinValue(light,SIZEARR),light);
-          prTime3=millis();
-        }
-      }
     }
   }
 }
@@ -428,37 +438,6 @@ void AboutPunctMenu(){               // Функция с информацией
       display.print("ngolyas123@gmail.com");
       display.display();
       prTime4=millis();
-    }
-  }
-}
-void weatherMenuPoint(){             // Меню погоды
-  while(!enc1.isPress()){
-    if(millis()-prTime4>2000){     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      enc1.tick();
-      
-      timeNow1.hours     =  date.hours;
-      timeNow1.mins      =  date.minutes;
-      timeNow1.secs      =  date.seconds;
-      timeNow1.days      =  date.day;
-      timeNow1.mounths   =  date.month;
-      timeNow1.years     =  date.year;
-      timeNow1.dayOfWeek =  date.dayOfWeek;
-
-      display.clearDisplay();
-      //timeConvert();
-      display.setCursor(0,0);
-      display.print(timeNow1.years);
-      display.setCursor(0,10);
-      display.print(timeNow1.mounths);
-      display.setCursor(0,20);
-      display.print(timeNow1.days);
-      display.setCursor(0,30);
-      display.print(timeNow1.hours);
-      display.setCursor(0,40);
-      display.print(timeNow1.mins);
-      display.setCursor(0,50);
-      display.print(timeNow1.dayOfWeek);
-      display.display();
     }
   }
 }
